@@ -31,7 +31,7 @@ bot.on('message', function(event) {
         event.reply("抓不到匯率辣").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
       })
     } else {
-      if (/[^\u0800-\u4e00]/.test(event.message.text)) {
+      if (isJapanese(event.message.text)) {
         event.reply('アホ？')
       } else {
         event.reply("本汪聽不懂你在說什麼捏").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
@@ -52,4 +52,10 @@ function confirmCon (con) {
   } else {
     return [- 1]
   }
+}
+
+function isJapanese(temp) { 
+	var re = /[^\u0800-\u4e00]/; 
+	if(re.test(temp)) return false; 
+	return true; 
 }
