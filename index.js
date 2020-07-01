@@ -56,7 +56,7 @@ function confirmCon (con) {
 }
 
 function isJapanese(temp) { 
-	var re = /[^\u0800-\u4e00]/; 
-	if(re.test(temp)) return false; 
-	return true; 
+	var re = /[\u0800-\u4e00]/; 
+	if(re.test(temp)) return true; 
+	return false; 
 }
