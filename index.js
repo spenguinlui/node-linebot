@@ -23,7 +23,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 // 監聽收到訊息
 bot.on('message', function(event) {
   if (event.message.text) {
-    isRate = confirmCon(event.message.text)
+    let isRate = confirmCon(event.message.text)
     if (isRate[0] >= 0){
       rate(isRate[1], isRate[0]).then((res)=> {
         event.reply(res).then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
@@ -40,15 +40,15 @@ bot.on('message', function(event) {
   }
 });
 
-const confirmCon = (con) => {
+function confirmCon (con) {
   if (con.indexOf("美金") >= 0 || con.indexOf("美元") >= 0 || con.indexOf("USD") >= 0) {
-    return [0, 美金]
+    return [0, '美金']
   } else if (con.indexOf("港幣") >= 0 || con.indexOf("HKD") >= 0) {
-    return [1, 港幣]
+    return [1, '港幣']
   } else if (con.indexOf("日圓") >= 0 || con.indexOf("日幣") >= 0 || con.indexOf("JPY") >= 0) {
-    return [7, 日幣]
+    return [7, '日幣']
   } else if (con.indexOf("人民幣") >= 0 || con.indexOf("CNY") >= 0) {
-    return [18, 人民幣]
+    return [18, '人民幣']
   } else {
     return [- 1]
   }
