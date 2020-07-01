@@ -20,16 +20,4 @@ const methods = (con) => {
   })
 }
 
-const confirmCon = (con) => {
-  if (con.indexOf("美金") >= 0 || con.indexOf("美元") >= 0 || con.indexOf("USD") >= 0) {
-    return 0
-  } else if (con.indexOf("港幣") >= 0 || con.indexOf("HKD") >= 0) {
-    return 1
-  } else if (con.indexOf("日圓") >= 0 || con.indexOf("日幣") || con.indexOf("JPY") >= 0) {
-    return 7
-  } else if (con.indexOf("人民幣") >= 0 || con.indexOf("CNY") >= 0) {
-    return 18
-  }
-}
-
 module.exports = methods

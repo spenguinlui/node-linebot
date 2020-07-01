@@ -22,15 +22,34 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 // 監聽收到訊息
 bot.on('message', function(event) {
-  if (event.message.text.indexOf("匯率") >= 0 || event.message.text.indexOf("rate") >= 0 ) {
-    rate(event.message.text).then((res)=> {
-      event.reply(res).then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
-    }).catch(() => {
-      event.reply("抓不到匯率辣").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
-    })
-  } else if (/[^\u0800-\u4e00]/.test(event.message.text)) {
-    event.reply('アホ？')
-  } else {
-    event.reply("本汪聽不懂你在說什麼捏").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+  if (event.message.text) {
+    isRate = confirmCon(event.message.text)
+    if (isRate >= 0){
+      rate(event.message.text).then((res)=> {
+        event.reply(res).then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+      }).catch(() => {
+        event.reply("抓不到匯率辣").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+      })
+    } else {
+      if (/[^\u0800-\u4e00]/.test(event.message.text)) {
+        event.reply('アホ？')
+      } else {
+        event.reply("本汪聽不懂你在說什麼捏").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+      }
+    }
   }
 });
+
+const confirmCon = (con) => {
+  if (con.indexOf("美金") >= 0 || con.indexOf("美元") >= 0 || con.indexOf("USD") >= 0) {
+    return 0
+  } else if (con.indexOf("港幣") >= 0 || con.indexOf("HKD") >= 0) {
+    return 1
+  } else if (con.indexOf("日圓") >= 0 || con.indexOf("日幣") || con.indexOf("JPY") >= 0) {
+    return 7
+  } else if (con.indexOf("人民幣") >= 0 || con.indexOf("CNY") >= 0) {
+    return 18
+  } else {
+    return - 1
+  }
+}
