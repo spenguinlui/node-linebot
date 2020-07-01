@@ -22,19 +22,20 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 // 監聽收到訊息
 bot.on('message', function(event) {
+  console.log(event)
   if (event.message.text) {
     let isRate = confirmCon(event.message.text)
     if (isRate[0] >= 0){
       rate(isRate[1], isRate[0]).then((res)=> {
-        event.reply(res).then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+        event.reply(res)
       }).catch(() => {
-        event.reply("抓不到匯率辣").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+        event.reply("抓不到匯率辣")
       })
     } else {
       if (isJapanese(event.message.text)) {
         event.reply('アホ？')
       } else {
-        event.reply("本汪聽不懂你在說什麼捏").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
+        event.reply("本汪聽不懂你在說什麼捏")
       }
     }
   }
