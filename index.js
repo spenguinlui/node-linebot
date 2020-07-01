@@ -25,7 +25,7 @@ bot.on('message', function(event) {
   if (event.message.text) {
     isRate = confirmCon(event.message.text)
     if (isRate >= 0){
-      rate(event.message.text).then((res)=> {
+      rate(isRate).then((res)=> {
         event.reply(res).then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })
       }).catch(() => {
         event.reply("抓不到匯率辣").then(() => { console.log("回覆成功") }).catch(() => { console.log("回覆失敗") })

@@ -10,9 +10,8 @@ const methods = (con) => {
     }, (error, response, body) => {
       if (error || !body) { return } else {
         let $ = cheerio.load(body);
-        contryIndex = confirmCon(con)
-        let buying = $('td[data-table=本行即期買入].rate-content-sight')[contryIndex].children[0].data;
-        let selling = $('td[data-table=本行即期賣出].rate-content-sight')[contryIndex].children[0].data;
+        let buying = $('td[data-table=本行即期買入].rate-content-sight')[con].children[0].data;
+        let selling = $('td[data-table=本行即期賣出].rate-content-sight')[con].children[0].data;
         msg = '日幣即期買入: ' + buying + ' ,日幣即期賣出:' + selling
         resolve(msg)
       }
