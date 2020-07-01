@@ -4,9 +4,9 @@ const cheerio = require("cheerio")
 const express = require('express');
 
 var bot = linebot({
-  channelId: channelId,
-  channelSecret: channelSecret,
-  channelAccessToken: channelAccessToken
+  channelId: process.env.channelId,
+  channelSecret: process.env.ChannelSecret,
+  channelAccessToken: process.env.ChannelAccessToken
 });
 
 bot.on('message', function(event) {
